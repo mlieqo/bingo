@@ -1,4 +1,4 @@
-.PHONY: cq test format run
+.PHONY: cq test format run install
 
 cq:
 	poetry run ruff check .
@@ -13,3 +13,6 @@ format:
 
 run:
 	poetry run python -m bingo.run
+
+install:
+	poetry install
