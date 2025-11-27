@@ -1,4 +1,4 @@
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115.0+-blue?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.122.0+-blue?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Python](https://img.shields.io/badge/Python-3.12+-blue?style=flat&logo=python)](https://www.python.org/)
 
 # Bingo Solver API
