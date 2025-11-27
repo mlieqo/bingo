@@ -1,8 +1,6 @@
 from collections import defaultdict
 
-from bingo.settings import Settings
-
-settings = Settings()
+from bingo.settings import settings
 
 BoardGrid = list[list[int]]
 

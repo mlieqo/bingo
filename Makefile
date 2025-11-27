@@ -12,4 +12,4 @@ format:
 	poetry run ruff format .
 
 run:
-	poetry run uvicorn bingo.api:app --reload
+	poetry run python -m bingo.run

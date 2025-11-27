@@ -10,6 +10,10 @@ class Settings(BaseSettings):
 
     LOGGING_FORMAT: str = "[%(asctime)s][%(name)s][%(levelname)s] %(message)s"
 
+    HOST: str = "127.0.0.1"
     PORT: int = 8000
 
     BOARD_SIZE: int = 5
+
+
+settings = Settings()
