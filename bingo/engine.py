@@ -35,6 +35,30 @@ class BoardsManager:
 
         raise ValueError("No winning board found.")
 
+    def play_until_last_win(self, numbers: list[int]) -> int:
+        """
+        Simulate drawing numbers until the last board wins
+        """
+        remaining = set(range(len(self.boards)))
+        last_score: int | None = None
+
+        for number in numbers:
+            for board_idx in self.global_index[number]:
+                if board_idx not in remaining:
+                    continue
+
+                board = self.boards[board_idx]
+                if board.mark(number):
+                    remaining.remove(board_idx)
+                    last_score = board.unmarked_sum() * number
+
+            if not remaining:
+                if last_score is not None:
+                    return last_score
+                break
+
+        raise ValueError("No winning board found.")
+
 
 class BingoBoard:
     """
@@ -97,3 +121,8 @@ class BingoBoard:
 def find_first_winner_score(numbers: list[int], board_grids: list[BoardGrid]) -> int:
     manager = BoardsManager(board_grids)
     return manager.play_until_first_win(numbers)
+
+
+def find_last_winner_score(numbers: list[int], board_grids: list[BoardGrid]) -> int:
+    manager = BoardsManager(board_grids)
+    return manager.play_until_last_win(numbers)

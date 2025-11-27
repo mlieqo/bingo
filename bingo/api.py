@@ -1,10 +1,17 @@
+from typing import Literal
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field, model_validator
 
-from bingo.engine import BoardGrid, find_first_winner_score
+from bingo.engine import BoardGrid, find_first_winner_score, find_last_winner_score
 
 
 class SolveRequest(BaseModel):
+    mode: Literal["first", "last"] = Field(
+        default="first",
+        description='Which variant to solve: "first" for the first winning board, "last" for the last winning board.',
+        examples=["first"],
+    )
     numbers: list[int] = Field(
         description="Drawn numbers in order.",
         examples=[[5, 8, 10, 3, 7, 2, 12, 9, 4, 6, 11, 1, 13, 14, 15, 16, 17]],
@@ -60,7 +67,10 @@ def solve_bingo(request: SolveRequest) -> SolveResponse:
     boards = request.boards
 
     try:
-        score = find_first_winner_score(numbers, boards)
+        if request.mode == "first":
+            score = find_first_winner_score(numbers, boards)
+        else:
+            score = find_last_winner_score(numbers, boards)
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e)) from e
 
